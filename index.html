@@ -149,7 +149,7 @@ function mobileRender(w,v,t){
    // show specialized model for each wave type without losing the associated vocabulary
    if(typ==='em'){mcaption('Electromagnetic waves','A radio signal travels without air');mdot(80,250,25,mp.violet);mbox(272,214,55,80,'#5073a6');for(let k=0;k<3;k++){m.strokeStyle=mp.cyan;m.lineWidth=3;m.beginPath();m.arc(86,250,50+k*48,-.75,.75);m.stroke()}mpill('NO AIR NEEDED',mp.green)}
    else if(typ==='sound'||typ==='longitudinal'){mcaption('Particles move back and forth','Compressions travel through matter');mparticles(t,75,'long');mpill('LONGITUDINAL WAVE',mp.cyan)}
-   else {let shake=sc==='seismic'?v:55;mcaption('Earthquake energy moves outward','The ground vibrates as a wave passes');ml(40,295,360,295,mp.green,7);mbox(155+Math.sin(t*7)*shake*.16,190,90,104,'#8090a9');mpill('SEISMIC WAVE',mp.yellow)}
+   else {let shake=7*Math.sin(t*6);mcaption('Earthquake energy moves through the ground','Wave fronts spread out from the fault.');mbox(24,270,352,96,'#64536e',6);ml(24,270,376,270,mp.green,4);ml(68,269,96,342,mp.coral,4);ml(96,342,124,269,mp.coral,4);mt('FAULT',96,354,12,mp.coral,'center');for(let k=0;k<4;k++){let rad=20+((t*68+k*49)%220);m.strokeStyle=k%2?mp.cyan:mp.yellow;m.lineWidth=3;m.beginPath();m.arc(96,308,rad,-Math.PI/2,Math.PI/2);m.stroke()}let hx=251+shake;mbox(hx,194,91,76,'#8397ac',3);m.fillStyle='#d5867b';m.beginPath();m.moveTo(hx-8,196);m.lineTo(hx+45,157);m.lineTo(hx+99,196);m.closePath();m.fill();mt('P + S WAVES',290,298,13,mp.white,'center');mpill('SEISMIC WAVES · ENERGY OUTWARD',mp.yellow)}
   }else if(typ==='surface'){mcaption('Wave along a water surface','Floating particles can move in small loops');mbox(25,269,350,104,'#214e7b');for(let i=0;i<10;i++){let x=35+i*36,y=268-Math.sin((x/350)*Math.PI*5-t*2)*v*.42;mdot(x,y,4,mp.cyan)}for(let i=0;i<6;i++){let x=75+i*52,y=319;let a=t*2+i*.5;mdot(x+Math.cos(a)*v*.15,y+Math.sin(a)*v*.15,7,mp.yellow)}mpill('SURFACE WAVE',mp.cyan)
   }else{
    let cyc=nm==='frequency'?1+v*.62:nm==='wavelength'?Math.max(1.1,7-v*.7):3.0;
@@ -177,28 +177,25 @@ function mobileRender(w,v,t){
   }else if(sc==='em'){
    mcaption('Radio signals are EM waves','No air or sound wave is required.');mbox(34,188,81,141,'#4862a2');mbox(289,196,74,133,'#3a5b81');mdot(78,297,7,mp.yellow);for(let k=0;k<3;k++){let a=132+k*40;for(let j=0;j<14;j++){let x=a+j*4;let y=260+Math.sin(j*(.25+v*.1)-t*(1+v*.6))*14;mdot(x,y,2,mp.cyan)}}mpill('PHONE → RADIO → SPEAKER',mp.cyan)
   }else{
-   let typ=sc==='optics'?(v===0?'reflect':'transmit'):sc;mcaption(sc==='refraction'?'Light bends entering a material':typ==='reflect'?'Light bounces off a mirror':sc==='absorb'?'Light energy enters the material':'Light can pass through a material','Follow the moving light along its path.');
+   let typ=sc==='optics'?(v===0?'reflect':'transmit'):sc;mcaption(sc==='refraction'?'Light bends entering a material':typ==='reflect'?'Light bounces off a mirror':sc==='absorb'?'Light energy enters the material':'Light can pass through a material',sc==='absorb'?'Particles gain energy and vibrate faster.':'Follow the moving light along its path.');
    mbox(188,172,32,165,typ==='absorb'?'#715256':'#42759c');
    let u=(t*.34)%1;
    if(typ==='reflect'){marr(40,310,203,245,mp.yellow);marr(203,245,350,245+v*1.45,mp.cyan);let x=u<.5?40+u*326:203+(u-.5)*294,y=u<.5?310-u*130:245+(u-.5)*v*1.45;mdot(x,y,8,mp.yellow)}
    else if(sc==='refraction'){marr(39,190,203,250,mp.yellow);marr(203,250,344,255+v*1.27,mp.cyan);let x=u<.5?39+u*328:203+(u-.5)*282,y=u<.5?190+u*120:250+(u-.5)*(10+v*2.54);mdot(x,y,8,mp.yellow)}
    else if(typ==='transmit'){marr(42,254,177,254,mp.yellow);m.globalAlpha=Math.max(.12,v/100);marr(232,254,353,254,mp.cyan);mdot(43+u*306,254,8,mp.yellow);m.globalAlpha=1}
-   else{marr(42,254,185,254,mp.yellow);mdot(195+Math.sin(t*2)*4,252,5+v*.13,mp.coral);for(let j=0;j<6;j++){let a=t*.3+j*Math.PI/3;ml(205,250,205+29*Math.cos(a),250+29*Math.sin(a),mp.coral,2)}}
+   else if(sc==='absorb'){mbox(176,178,108,152,'#544654',8);mt('MATERIAL',230,195,13,mp.white,'center');marr(31,250,169,250,mp.yellow,4);for(let j=0;j<9;j++){let x=195+(j%3)*27,y=225+Math.floor(j/3)*28,dx=Math.sin(t*3+j)*5,dy=Math.cos(t*2+j)*5;mdot(x+dx,y+dy,5,mp.coral)}for(let j=0;j<3;j++)marr(291,218+j*28,331,204+j*28,mp.coral,2);mt('WARMER',334,258,12,mp.coral,'center')}else{marr(42,254,185,254,mp.yellow);mdot(195+Math.sin(t*2)*4,252,5+v*.13,mp.coral);for(let j=0;j<6;j++){let a=t*.3+j*Math.PI/3;ml(205,250,205+29*Math.cos(a),250+29*Math.sin(a),mp.coral,2)}}
    mpill(typ==='reflect'?'REFLECTED':typ==='transmit'?'TRANSMITTED':sc==='absorb'?'ABSORBED':'REFRACTED',mp.cyan)
   }
  }else{
   let isCond=sc==='conduct'||sc==='insulate'||sc==='matter',choice=sc==='insulate'?'INSULATION: '+['THIN','MEDIUM','THICK'][v]:isCond?(v===0?'COPPER':'RUBBER'):sc==='battery'?'BATTERY':sc==='electrical'?'ELECTRICAL ENERGY':'THERMAL ENERGY';
-  mcaption(sc==='thermal'?'Particles carry thermal energy':sc==='battery'?'A battery stores chemical energy':sc==='electrical'?'Energy can power a speaker':'Compare materials',sc==='insulate'?'An insulator slows energy transfer':'Watch the changing model.');
+  mcaption(sc==='thermal'?'Particles carry thermal energy':sc==='battery'?'A battery stores chemical energy':sc==='electrical'?'Energy can power a speaker':sc==='insulate'?'Insulators slow heat transfer':'Material properties compare samples',sc==='insulate'?'Heat moves warm to cool; thicker slows it.':sc==='matter'?'Copper lets charges move; rubber holds them.':'Watch the changing model.');
   mbox(45,163,310,188,'#26395c');
   if(sc==='battery'){
    mbox(157,164,86,193,'#384971',16);mbox(178,145,44,18,'#b9c7e6',4);mbox(171,330,58,10,'#91a5c6',3);mbox(171,Math.max(188,330-130*v/100),58,130*v/100,5,mp.green);mt('+',200,140,25,mp.coral,'center');mt('−',200,378,25,mp.cyan,'center');mt('CHEMICAL ENERGY STORED',200,354,15,mp.yellow,'center')
   }else if(sc==='electrical'){mbattery(125,252);m.globalAlpha=Math.max(.1,v/100);marr(177,250,274,250,mp.yellow,5);mdot(300,247,12+v*.18,mp.cyan);m.globalAlpha=1;mt('ENERGY →',200,322,18,mp.yellow,'center')
-  }else{
-   for(let k=0;k<5;k++)for(let j=0;j<7;j++){
-    let x=80+j*39,y=189+k*34,energy=sc==='thermal'?v/100:sc==='insulate'?1-v/100:(isCond&&v===0)?1:.18;
-    let wiggle=(.6+energy*7)*Math.sin(t*2.8+k+j);mdot(x+wiggle,y,6,energy>.5?mp.coral:mp.cyan)
-   }
-  }
+  }else if(sc==='insulate'){let width=[12,27,46][v];mdot(102,259,45,'#f19865');mdot(298,259,45,'#5e9fda');mt('WARM',102,259,13,'#1c2544','center');mt('COOL',298,259,13,'#152948','center');mbox(200-width/2,183,width,151,'#aa80c9',6);mt(['THIN','MEDIUM','THICK'][v],200,174,12,mp.violet,'center');for(let j=0;j<[5,3,1][v];j++){let x=140+((t*.15+j/[5,3,1][v])%1)*120;mdot(x,238+(j%3)*16,4,mp.yellow)}mt('Heat slows; it does not stop.',200,331,13,mp.white,'center')
+  }else if(sc==='matter'){mbox(34,166,156,190,'#263e64');mbox(210,166,156,190,'#263e64');mt('COPPER',112,184,15,mp.cyan,'center');mt('RUBBER',288,184,15,mp.coral,'center');for(let j=0;j<12;j++){let x1=55+(j%4)*34,x2=231+(j%4)*34,y=220+Math.floor(j/4)*33;mdot(x1+Math.sin(t*2+j)*12,y,7,'#aab5ca');mdot(x1+Math.sin(t*2+j)*12+5,y,3,mp.yellow);mdot(x2,y,7,'#aab5ca');mdot(x2+2,y,3,mp.yellow)}mt('charges move',112,331,13,mp.white,'center');mt('charges stay close',288,331,13,mp.white,'center')
+  }else{for(let k=0;k<5;k++)for(let j=0;j<7;j++){let x=80+j*39,y=189+k*34,energy=sc==='thermal'?v/100:(isCond&&v===0)?1:.18,wiggle=(.6+energy*7)*Math.sin(t*2.8+k+j);mdot(x+wiggle,y,6,energy>.5?mp.coral:mp.cyan)}}
   mpill(choice,sc==='thermal'?mp.coral:mp.cyan)
  }
 }
