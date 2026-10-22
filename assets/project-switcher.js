@@ -1,0 +1,14 @@
+(()=>{'use strict';
+const root=new URL('../',document.currentScript.src);
+const projects=[["grade-6-science-lab","Grade 6 Science Lab","Nine investigations covering particles, heat, circuits, waves, light, Moon phases, and plate motion."],["air-conditioner-lab","Air Conditioner Lab","Explore how an air conditioner transfers energy."],["particles-and-temperature","Particles & Temperature","Connect particle motion, thermal energy, heat, and temperature."],["energy-and-waves","Energy & Waves","Explore energy and waves through a wireless speaker."],["density-tower","Density Tower Lab","Predict and investigate the order of liquids in a density tower."]];
+const host=document.createElement('div');host.id='project-switcher';
+const shadow=host.attachShadow({mode:'open'});
+shadow.innerHTML=`<style>:host{display:block;position:relative;z-index:20}*{box-sizing:border-box}nav{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 20px;background:#f4f0ff;color:#302354;border-bottom:1px solid #d7ccef;font:15px/1.4 system-ui,sans-serif}a{color:#55329c;font-weight:750;text-decoration:none}form{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-left:auto}label{font-weight:650}select,button{font:inherit;min-height:44px;border:1px solid #baabd9;border-radius:8px;padding:8px 12px;background:white;color:#302354}select{max-width:100%;min-width:180px}button{background:#6338ac;color:white;cursor:pointer}a:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid #be7b00;outline-offset:3px}@media(max-width:600px){nav{padding:10px 12px;gap:8px}form{margin-left:0;width:100%}label{width:100%;font-size:13px}select{flex:1;min-width:0}}</style><nav aria-label="Project navigation"><a id="all" target="_self">← All projects</a><form><label for="project">Switch project</label><select id="project" name="project"></select><button type="submit">Go</button></form></nav>`;
+shadow.getElementById('all').href=new URL('projects/',root).href;
+const select=shadow.getElementById('project');
+const current=location.pathname;
+projects.forEach(([slug,title])=>{const option=document.createElement('option');option.value=slug;option.textContent=title;option.selected=current.includes('/'+slug+'/');select.append(option)});
+if(current===root.pathname||current===root.pathname+'index.html')select.value='energy-and-waves';
+shadow.querySelector('form').addEventListener('submit',e=>{e.preventDefault();location.assign(new URL('projects/'+select.value+'/',root).href)});
+document.body.prepend(host);
+})();

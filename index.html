@@ -249,4 +249,5 @@ function tick(ms){if(!state.lastFrame)state.lastFrame=ms;let dt=clamp((ms-state.
 window.__sparkCapture=(index,time,width=640,height=360)=>{const originalW=C.width,originalH=C.height;C.width=width;C.height=height;ctx.setTransform(width/960,0,0,height/530,0,0);let w=WORDS[index];renderStage(w,w.default,time,{charges:true,field:true,changed:0,advanced:false});let url=C.toDataURL('image/png');C.width=originalW;C.height=originalH;ctx.setTransform(1,0,0,1,0,0);draw();return url};
 function init(){populate();const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced){state.paused=true;$('play').textContent='▶ Play';$('play').setAttribute('aria-pressed','true')}refresh();requestAnimationFrame(tick)}
 init();
-</script></body></html>
+</script><script src="assets/project-switcher.js" defer></script>
+</body></html>

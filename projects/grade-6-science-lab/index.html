@@ -23,4 +23,5 @@ menu.addEventListener('click',event=>{const link=event.target.closest('a[data-ac
 window.addEventListener('message',event=>{if(event.data?.type!=='lab-height')return;for(const frame of loaded.values()){if(event.source===frame.contentWindow&&Number.isFinite(event.data.height))frame.style.height=Math.max(300,Math.min(6000,event.data.height))+'px'}});
 function fromHash(){const id=location.hash.slice(1);navigate(investigations.some(x=>x.id===id)?id:investigations[0].id)}window.addEventListener('hashchange',fromHash);fromHash();
 if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'open_science_investigation',title:'Open science investigation',description:'Open one of the nine science simulations in the visible activity area. Does not submit or collect responses.',inputSchema:{type:'object',properties:{activity:{type:'string',enum:investigations.map(x=>x.id)}},required:['activity'],additionalProperties:false},annotations:{readOnlyHint:false},execute(input){if(!input||typeof input.activity!=='string')throw Error('An activity is required');return navigate(input.activity)}})).catch(()=>{})}catch{}}
-</script></body></html>
+</script><script src="../../assets/project-switcher.js" defer></script>
+</body></html>

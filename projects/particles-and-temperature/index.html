@@ -37,4 +37,5 @@ $('exit2').addEventListener('change',()=>recordInteraction('Completed Connection
 document.querySelectorAll('button').forEach(button=>{button.type='button';button.addEventListener('click',()=>{if(button.dataset.check!==undefined||button.id==='checkQuiz')recordInteraction('Checked response: '+String(button.textContent||button.id||'button').trim())});button.addEventListener('touchend',event=>{if(event.cancelable)event.preventDefault();button.click()},{passive:false})});
 show(0);requestAnimationFrame(animate);
 
-</script></body></html>
+</script><script src="../../assets/project-switcher.js" defer></script>
+</body></html>
