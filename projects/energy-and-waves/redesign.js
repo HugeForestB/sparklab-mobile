@@ -44,7 +44,7 @@
   const explore=$id("explorePage");
   const actions=document.createElement("div");
   actions.className="modelActions";
-  actions.innerHTML='<button type="button" id="backToMode">← Back to mode</button><span id="modelBreadcrumb">Interactive model</span>';
+  actions.innerHTML='<button type="button" id="backToMode">← Back to mode</button><span id="modelBreadcrumb">Interactive model</span><button type="button" id="openBonusFromModel" title="Optional deeper mathematics">✦ Explore deeper physics</button>';
   explore.prepend(actions);
   const rail=document.createElement("div");rail.id="sequenceRail";rail.setAttribute("aria-label","Sequence stages");explore.insertBefore(rail,explore.children[1]);
   const context=document.createElement("div");context.id="sequenceContext";explore.insertBefore(context,explore.children[2]);
@@ -52,6 +52,7 @@
   $id("feedback").insertAdjacentElement("afterend",review);
   const bonusExtra=document.createElement("div");bonusExtra.id="bonusRelated";bonusExtra.className="hidden";explore.appendChild(bonusExtra);
   let mode="home",entryMode="sequence",stageIndex=0,search="";
+  const attempts=new Map();
   const oldSelect=selectTerm,oldRefresh=refresh,oldDraw=draw,oldChoose=choose;
   const oldProgressKey="sparklab-progress-v2";
   const verifiedKey="energy-waves-verified-v3";
@@ -72,8 +73,8 @@
   }
   window.energyWavesVerify=verify;
   function updateReview(){
-    const passed=state.done.has(state.id);
-    review.textContent=passed?"✓ Check passed. You can revisit this model anytime.":"Choose a prediction and use the model to check it. A correct answer records this check.";
+    const passed=state.done.has(state.id),attempt=attempts.get(state.id)||{};
+    review.textContent=passed?"✓ Prediction and model investigation completed. Revisit this anytime.":attempt.correct?"Prediction correct. Now change a model variable to test it and complete the check.":attempt.interacted?"You tested the model. Choose a prediction to check your understanding.":"Make a prediction and change a model variable to test it. Both are needed for this check.";
     review.classList.toggle("passed",passed);
   }
   function showView(target){
@@ -144,6 +145,7 @@
     draw();
   }
   selectTerm=function(i){
+    attempts.set(Number(i),{correct:false,interacted:false});
     oldSelect(Number(i));
     showView("model");
     updateModel();
@@ -156,11 +158,29 @@
   };
   choose=function(n){
     oldChoose(n);
-    if(Number(n)===term().correct)verify(state.id);
+    const attempt=attempts.get(state.id)||{correct:false,interacted:false};
+    attempt.correct=Number(n)===term().correct;
+    attempts.set(state.id,attempt);
+    if(attempt.correct && attempt.interacted)verify(state.id);
+    else updateReview();
+  };
+  const oldControlChanged=controlChanged;
+  controlChanged=function(v){
+    const id=state.id,before=val();
+    oldControlChanged(v);
+    const attempt=attempts.get(id)||{correct:false,interacted:false};
+    if(Number(v)!==Number(before))attempt.interacted=true;
+    attempts.set(id,attempt);
+    if(attempt.correct && attempt.interacted)verify(id);
     else updateReview();
   };
   $id("mastered").onclick=null;
   $id("backToMode").onclick=()=>showView(entryMode);
+  $id("openBonusFromModel").onclick=()=>{
+    const group=term().group,scene=term().scene;
+    const moduleIndex=group==="Electric circuits"?4:group==="Light & EM waves"?(["refraction","optics","absorb","transmit","reflect"].includes(scene)?3:2):group==="Sound & vibrations"?1:group==="Waves & motion"?0:3;
+    showView("bonus");window.EnergyBonus?.openModule(moduleIndex);
+  };
   $id("prev").onclick=()=>openStage(stageIndex-1);
   $id("next").onclick=()=>openStage(stageIndex+1);
   $id("wordSearch").addEventListener("input",renderWordWall);
