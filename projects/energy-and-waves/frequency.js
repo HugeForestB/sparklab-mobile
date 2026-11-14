@@ -26,8 +26,8 @@
   function render(time,f){
     if(!panel.isConnected||panel.classList.contains("hidden"))return;
     const normalizedTime=Math.max(0,time);
-    const sec=Math.max(0,Math.floor(normalizedTime-1e-7));
-    const elapsed=Math.max(0,Math.min(1,normalizedTime-sec));
+    const elapsed=Math.max(0,Math.min(1,normalizedTime));
+    // Hold the first completed one-second measurement on screen while the waves keep moving.
     const count=Math.min(f,Math.floor(elapsed*f+1e-7));
     const lambda=c/f, omega=2*Math.PI*f, k=2*Math.PI/lambda;
     p.clearRect(0,0,960,545);
