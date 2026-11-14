@@ -1,0 +1,115 @@
+
+/* Energy & Waves redesign. Legacy simulation renderers are intentionally retained. */
+.nav,.labrow,.sidebar,.mobileBrowse,#labsPage,#wallPage,#teacherPage,#slow,#mastered,#scopeDetails,#advDetails,#play{display:none!important}
+.shell{max-width:1250px;padding:14px 23px 36px}
+.layout{display:block}
+.view{background:transparent;border:0;box-shadow:none;padding:0}
+.hero{margin-bottom:16px;padding:19px 28px;border-radius:20px}
+.hero h1{font-size:clamp(24px,2.8vw,34px)}
+.hero p{font-size:14px}
+.topbar{padding-bottom:12px}
+.redesignTabs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 18px}
+.redesignTabs button{background:white;border:1px solid #dce3f1;border-radius:12px;padding:11px 16px;color:#384f76;font-weight:800}
+.redesignTabs button[aria-current="page"]{background:#45399b;color:white;border-color:#45399b}
+.redesignTabs button:last-of-type{margin-left:auto}
+#speedTool{margin-left:auto;position:relative}
+#speedTool summary{list-style:none;cursor:pointer;background:#eef1ff;border:1px solid #ccd6f0;color:#3c4676;padding:11px 14px;border-radius:12px;font-size:13px;font-weight:850}
+#speedTool summary::-webkit-details-marker{display:none}
+#speedTool[open] .speedContent{position:absolute;z-index:30;right:0;top:48px;background:white;min-width:275px;padding:16px;border:1px solid #dce2f2;border-radius:16px;box-shadow:0 14px 35px #16244b25}
+#speedTool input{width:100%;accent-color:#6650ca}
+.speedTicks{display:flex;justify-content:space-between;font-size:11px;color:#667a92}
+.modePanel{background:white;border:1px solid #dce4f3;border-radius:20px;padding:24px;box-shadow:0 7px 24px #1d356209}
+.modePanel h2{font-size:clamp(25px,3vw,34px);letter-spacing:-.8px;margin:6px 0 9px}
+.modePanel p{color:#536580;line-height:1.55}
+.modeCards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:21px 0}
+.modeCard{border:1px solid #d9e0f2;background:#f8faff;border-radius:17px;min-height:160px;padding:22px;text-align:left;color:#213258;cursor:pointer}
+.modeCard:hover,.wordConcept:hover,.stageLink:hover{border-color:#9685e1;background:#f0edff}
+.modeCard strong{display:block;font-size:20px;margin:8px 0}
+.modeCard span{font-size:29px}
+.modeCard small{font-size:14px;color:#546781;line-height:1.45;display:block}
+.bonusLink{border:0;background:transparent;color:#5541ad;font-weight:820;padding:10px 0;text-decoration:underline;text-underline-offset:3px}
+.sequenceProgress{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:13px;color:#65718c}
+.sequenceProgress progress{flex:1;height:10px;accent-color:#6b4bd7}
+#sequenceRail{display:flex;gap:7px;overflow:auto;padding:2px 0 10px;scrollbar-width:thin;margin:0 0 9px}
+.stageLink{flex:0 0 auto;border:1px solid #dce4f5;border-radius:12px;background:#fff;padding:9px 13px;text-align:left;font-weight:800;color:#455675;font-size:12px;max-width:198px}
+.stageLink.active{background:#5042ac;color:white}
+.stageLink .stepNum{display:block;font-size:10px;opacity:.75;font-weight:700;margin-bottom:3px}
+#sequenceContext{border-left:4px solid #6d51ce;background:#f2efff;padding:13px 17px;border-radius:0 13px 13px 0;margin:0 0 15px}
+#sequenceContext h3{margin:0 0 3px;font-size:16px}
+#sequenceContext p{margin:0;font-size:13px;color:#46597b;line-height:1.5}
+.modelActions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px;flex-wrap:wrap}
+.modelActions button{border:1px solid #dae2f1;background:#fff;color:#445576;border-radius:11px;padding:9px 13px;font-weight:800}
+#modelBreadcrumb{font-size:13px;color:#61728e}
+#explorePage{background:#fff;border:1px solid #dce4f3;border-radius:19px;padding:20px}
+#explorePage .headingRow{margin-bottom:6px}
+#explorePage .underStage{padding-bottom:8px}
+#explorePage .mission{grid-template-columns:1fr 1fr}
+#explorePage .nextrow{margin-top:10px}
+#explorePage .nextrow .note{display:none}
+#explorePage .questionBox .choices button{min-height:42px}
+#reviewStatus{font-size:13px;margin-top:11px;color:#53647e;font-weight:700}
+#reviewStatus.passed{color:#08704d}
+#frequencyDetectorPanel{border-radius:18px;overflow:hidden;background:#101b3b;margin:12px 0 17px;color:#fff}
+.frequencyIntro{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:19px 22px 5px}
+.frequencyIntro h3{margin:5px 0;font-size:20px}
+.frequencyIntro p{color:#c8d5f0;font-size:13px;max-width:650px;margin:0 0 8px;line-height:1.4}
+.measureCaption{background:#2c406b;color:#e9f5ff;font-size:12px;padding:8px 11px;border-radius:10px;white-space:nowrap}
+#frequencyDetectorCanvas{display:block;width:100%;height:auto;aspect-ratio:960/545}
+.frequencyMeter{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:#27345b;border-top:1px solid #344b73}
+.frequencyMeter div{background:#192849;text-align:center;padding:13px 6px}
+.frequencyMeter .small{font-size:11px;color:#b8d0e8;display:block;min-height:29px}
+.frequencyMeter strong{font-size:23px;color:#ffe08b}
+.frequencyChallenge{padding:15px 20px;background:#eef4ff;color:#21375b;font-size:13px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.frequencyChallenge button{background:#5540b3;color:white;border:0;border-radius:10px;font-weight:850;padding:10px 13px}
+#frequencyChallengeFeedback{color:#176d50}
+body.frequencySelected #explorePage .canvasCard,body.frequencySelected #explorePage .underStage{display:none}
+#wordSearch{width:100%;font-size:15px;padding:13px 15px;border:1px solid #cbd6eb;border-radius:12px;margin:12px 0}
+.wordCategory{margin:12px 0;border:1px solid #dce3f1;border-radius:15px;background:#fbfcff;overflow:hidden}
+.wordCategory summary{padding:16px 18px;font-weight:850;cursor:pointer;color:#30436a}
+.wordCategory summary .count{float:right;font-size:12px;color:#7988a0}
+.wordCategoryBody{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0 14px 14px}
+.wordConcept{border:1px solid #dee5f2;background:white;border-radius:11px;padding:12px;text-align:left;min-height:95px;cursor:pointer}
+.wordConcept strong{font-size:14px;display:block;color:#23375c;margin-bottom:6px}
+.wordConcept small{font-size:12px;color:#526580;line-height:1.4;display:block}
+.backLink{margin-bottom:14px}
+#bonusWorkspace{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px}
+.bonusTopics{display:flex;flex-direction:column;gap:7px}
+.bonusTopics button{border:1px solid #dce3f0;border-radius:11px;padding:12px;background:white;text-align:left;color:#334c75;font-weight:800}
+.bonusTopics button.active{background:#493d9d;color:white}
+.bonusLab{background:#f8faff;border:1px solid #d9e1f1;padding:20px;border-radius:16px;min-width:0}
+.bonusLab .bonusEquations{overflow:auto;background:#1d294a;color:#e8efff;padding:14px;border-radius:12px;font-family:ui-monospace,monospace;font-size:13px;line-height:1.9;margin:12px 0}
+.bonusLab .bonusEquations code{white-space:pre-wrap}
+.bonusLabCanvas{display:block;width:100%;height:auto;aspect-ratio:800/300;border-radius:14px;background:#101a3d;margin:12px 0}
+.bonusControls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}
+.bonusControls label{font-size:13px;font-weight:800;color:#405475;display:flex;flex:1 1 180px;flex-direction:column;gap:6px}
+.bonusControls input{width:100%;accent-color:#5c49b5}
+.bonusValues{background:white;padding:12px;border:1px solid #dae2f1;border-radius:10px;color:#334563;font-size:14px;line-height:1.6}
+#bonusWorkspace details{margin-top:12px;border:1px solid #dce3f1;padding:11px 14px;border-radius:12px;background:white}
+#bonusWorkspace details summary{font-weight:850;cursor:pointer;color:#4d42a3}
+#bonusWorkspace details p{font-size:13px}
+@media(max-width:900px){
+ #bonusWorkspace{grid-template-columns:1fr}.bonusTopics{flex-direction:row;overflow:auto}.bonusTopics button{white-space:nowrap}
+ .wordCategoryBody{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .redesignTabs button:last-of-type{margin-left:0}
+}
+@media(max-width:700px){
+ .shell{padding:11px}
+ .topbar{flex-wrap:wrap}.topright{margin-left:auto}
+ .heroicon{display:none}
+ .modePanel{padding:17px}.modeCards{grid-template-columns:1fr}
+ .modeCard{min-height:120px;padding:17px}
+ .redesignTabs{gap:6px}
+ .redesignTabs button{padding:9px 10px;font-size:12px}
+ #speedTool{margin-left:0}
+ #explorePage{padding:12px}
+ #explorePage .mission{grid-template-columns:1fr}
+ .frequencyIntro{display:block;padding:15px 14px 4px}
+ .measureCaption{display:inline-block}
+ .frequencyMeter{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .wordCategoryBody{grid-template-columns:1fr 1fr;padding:0 9px 9px;gap:7px}
+ .wordConcept{padding:10px}
+ #bonusWorkspace{display:block}
+ .bonusTopics{margin-bottom:12px}
+}
+@media(max-width:420px){.wordCategoryBody{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.modeCard:hover,.wordConcept:hover,.stageLink:hover{transform:none}}
