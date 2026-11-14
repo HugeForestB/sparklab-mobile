@@ -64,7 +64,7 @@
    ctx.beginPath();ctx.moveTo(128,92);ctx.lineTo(214+shift,120);ctx.lineTo(214+shift,185);ctx.lineTo(128,214);ctx.closePath();ctx.fillStyle="#83b6e3";ctx.fill();
    line(210+shift,150,260,150,"#ffe28d",3);text("voice coil + moving diaphragm → acoustic field",42,273);
   }
-  const val=kind==="optics"?`Incidence angle: ${(15+frequency*7).toFixed(1)}°. Two-index refraction example; the amplitude slider has no effect in this view.`:kind==="mechanics"?`Relative amplitude ${amplitude.toFixed(2)}; mode ${frequency.toFixed(1)}.`:`Relative amplitude ${amplitude.toFixed(2)} · frequency parameter ${frequency.toFixed(1)} (normalized units).`;
+  const val=kind==="optics"?`Incidence angle: ${(15+frequency*7).toFixed(1)}°. Two-index refraction example; the amplitude slider has no effect in this view.`:kind==="string"?`Relative amplitude ${amplitude.toFixed(2)}; mode ${frequency.toFixed(1)}.`:`Relative amplitude ${amplitude.toFixed(2)} · frequency parameter ${frequency.toFixed(1)} (normalized units).`;
   const valueLine=(kind==="speaker"?`Resonance and back-emf depend on circuit and mechanical parameters. `:kind==="sound"?`Pressure and velocity are phase-linked for a plane traveling wave. `:"")+val;
   els("bonusNumbers").textContent=valueLine;
  }
@@ -74,5 +74,5 @@
  let hostTime=()=>0;
  function mount(target,time){if(host.parentElement!==target)target.replaceChildren(host);hostTime=time;renderTabs();select(active);}
  function tick(){if(!host.isConnected||host.getClientRects().length===0)return;draw(hostTime());}
- window.EnergyBonus={mount,tick};
+ window.EnergyBonus={mount,tick,openModule:select};
 })();
