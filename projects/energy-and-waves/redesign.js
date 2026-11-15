@@ -85,7 +85,7 @@
   }
   function showView(target){
     mode=target;
-    const map={home,sequence,wall,bonus};
+    const map={home,sequence,wall:word,bonus};
     Object.entries(map).forEach(([key,el])=>el.classList.toggle("hidden",key!==target));
     explore.classList.toggle("hidden",target!=="model");
     if(target==="model"){state.page="explore";}
