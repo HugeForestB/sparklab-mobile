@@ -39,6 +39,7 @@ Redesign the existing classroom app rather than replace it. Keep a mode that cur
 - Checked required legacy DOM IDs remain in place.
 - Numerically checked phase-cycle counts for 1, 2, 4, and 7 Hz across time windows, including before and after one second.
 - Checked reflected, transmitted, and absorbed illustrative energy fractions sum to 1 for several sample thicknesses.
+- Ran 10 mock-DOM interaction checks: initialization, guided navigation, prediction-only verification guard, prediction + manipulation success, bonus-mode entry, bonus topic switch, Word Wall navigation, materials rendering, 2× playback control, and completed 4 Hz detector count. All passed after correcting a Word Wall mode-map typo. **Mock-DOM checks are not real-browser integration tests.**
 
 ### Manual browser tests required before merging
 - [ ] Open from a local HTTP server, including on an actual phone.
