@@ -20,6 +20,7 @@
     {title:"Waves & Light",icon:"☀",test:w=>w.group==="Light & EM waves"}
   ];
   const pageTitle="Unit 2 Phenomena";
+  Object.assign(WORDS[0],{question:"Which property compares the mass of a sample with its volume?",choices:["Density","Length"],correct:0,why:"Density is mass divided by volume. Sample dimensions can change without changing the material’s density.",note:"A material’s density is an intrinsic property. Length and thickness are dimensions of a particular sample; reflectivity also depends on its surface and the incoming light."});
   const nav=document.createElement("nav");
   nav.className="redesignTabs";nav.setAttribute("aria-label","Application modes");
   nav.innerHTML='<button type="button" data-newview="home">⌂ Start</button><button type="button" data-newview="sequence">Learning Sequence</button><button type="button" data-newview="wall">Word Wall</button><button type="button" data-newview="bonus">✦ Bonus Physics</button><details id="speedTool"><summary>Animation speed: <span id="speedValue">1×</span></summary><div class="speedContent"><label for="globalSpeed"><strong>Playback multiplier</strong></label><input id="globalSpeed" type="range" min="0" max="3" step="0.25" value="1" aria-label="Playback speed multiplier"><div class="speedTicks"><span>0× paused</span><span>1× normal</span><span>3×</span></div><p style="font-size:12px;color:#64728c;margin-bottom:0">Changes animation playback, not the physical frequency or wavelength.</p></div></details>';
@@ -72,6 +73,11 @@
     if(mode==="sequence"||entryMode==="sequence")renderRail();
   }
   window.energyWavesVerify=verify;
+  window.energyWavesModelChanged=(id)=>{
+    const attempt=attempts.get(id)||{correct:false,interacted:false};
+    attempt.interacted=true;attempts.set(id,attempt);
+    if(attempt.correct)verify(id);else if(state.id===id)updateReview();
+  };
   function updateReview(){
     const passed=state.done.has(state.id),attempt=attempts.get(state.id)||{};
     review.textContent=passed?"✓ Prediction and model investigation completed. Revisit this anytime.":attempt.correct?"Prediction correct. Now change a model variable to test it and complete the check.":attempt.interacted?"You tested the model. Choose a prediction to check your understanding.":"Make a prediction and change a model variable to test it. Both are needed for this check.";
@@ -92,6 +98,8 @@
     if(target==="wall"){renderWordWall();}
     if(target==="bonus" && window.EnergyBonus){window.EnergyBonus.mount($id("bonusMount"),()=>state.time);}
     document.body.classList.toggle("frequencySelected",target==="model"&&state.id===11);
+    document.body.classList.toggle("materialSelected",target==="model"&&state.id===0);
+    window.EnergyMaterial?.panel.classList.toggle("hidden",!(target==="model"&&state.id===0));
     const detector=$id("frequencyDetectorPanel");
     if(detector)detector.classList.toggle("hidden",!(target==="model"&&state.id===11));
     $id("speedTool").classList.toggle("hidden",target==="home");
@@ -125,6 +133,9 @@
   function updateModel(){
     const current=WORDS[state.id];
     document.body.classList.toggle("frequencySelected",state.id===11);
+    document.body.classList.toggle("materialSelected",state.id===0);
+    window.EnergyMaterial?.panel.classList.toggle("hidden",state.id!==0);
+    if(state.id===0)window.EnergyMaterial?.render();
     $id("frequencyDetectorPanel")?.classList.toggle("hidden",state.id!==11);
     $id("modelBreadcrumb").textContent=entryMode==="sequence"?`Learning Sequence · ${stageIndex+1} of 10`:`Word Wall · ${current.group}`;
     $id("backToMode").textContent=entryMode==="sequence"?"← All sequence stages":"← Word Wall";
@@ -154,6 +165,8 @@
   draw=function(){
     if(state.id===11){
       if(mode==="model"&&window.EnergyFrequency)window.EnergyFrequency.render(state.time,Number(val()));
+    } else if(state.id===0){
+      if(mode==="model")window.EnergyMaterial?.render();
     } else oldDraw();
   };
   choose=function(n){
