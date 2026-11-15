@@ -113,3 +113,22 @@ body.frequencySelected #explorePage .canvasCard,body.frequencySelected #exploreP
 }
 @media(max-width:420px){.wordCategoryBody{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.modeCard:hover,.wordConcept:hover,.stageLink:hover{transform:none}}
+
+/* Interactive sample-properties investigation. */
+body.materialSelected #explorePage .canvasCard,
+body.materialSelected #explorePage .underStage,
+body.materialSelected #explorePage .controls{display:none!important}
+#materialPanel{border-radius:18px;background:#101b3b;color:#edf5ff;margin:12px 0 17px;overflow:hidden}
+.materialIntro{padding:18px 20px 6px}
+.materialIntro h3{font-size:20px;margin:0 0 5px}
+.materialIntro p{color:#b9cbea;font-size:13px;line-height:1.5;max-width:740px;margin:0}
+.materialTabs{display:flex;gap:5px;overflow-x:auto;padding:13px 18px 8px}
+.materialTabs button{border:1px solid #52638b;border-radius:10px;background:#2b395e;color:#d5e5ff;padding:9px 13px;font-weight:800;white-space:nowrap}
+.materialTabs button.active{background:#b8acfc;color:#1a1947}
+#materialCanvas{display:block;width:100%;height:auto;aspect-ratio:960/450}
+.materialControls{background:#eef3ff;color:#2e3f68;display:flex;align-items:center;gap:13px;padding:15px 20px;flex-wrap:wrap;font-size:14px;font-weight:850}
+.materialControls input{accent-color:#7054ca;flex:1 1 230px}
+.materialControls output{color:#4d3aab;min-width:80px;text-align:right}
+.materialValues{background:#f9fbff;color:#354765;padding:13px 20px;font-size:13px;line-height:1.5}
+.materialCaution{background:#f9fbff;color:#72819e;font-size:11px;margin:0;padding:0 20px 16px;line-height:1.45}
+@media(max-width:700px){.materialIntro{padding:14px 14px 4px}.materialTabs{padding:10px}.materialTabs button{padding:8px 10px}.materialControls{padding:13px 14px}}
